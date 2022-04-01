@@ -1,0 +1,15 @@
+:root {
+    --bg: "#FFFFFF";
+}
+body {
+    margin: 0;
+    display: flex;
+    background-color: var(--bg);
+}
+#color {
+    position: absolute;
+    width: 5vw;
+    height: 5vw;
+    left: 47.5vw;
+    top: calc(50vh - 2.5vw);
+}
