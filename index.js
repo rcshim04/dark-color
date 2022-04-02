@@ -2,17 +2,31 @@ $(document).ready(function () {
     setBackground();
     $("#color").change(function() {
         setBackground();
-    })
+    });
+    $(".tooltip").click(function() {
+        navigator.clipboard.writeText($(this).text());
+        $("#tooltip").text("Copied!");
+    });
+    $(".tooltip").mouseout(function() {
+        $("#tooltip").text("Click to copy to clipboard");
+    });
 });
 
 function setBackground() {
     var hsv = HEXtoHSV($("#color").val());
     if (hsv.v > 0.5) {
         hsv.v = 1 - hsv.v;
-        $(":root").css("--bg", HSVtoHEX(hsv.h, hsv.s, hsv.v));
-        return;
+        var darkHEX = HSVtoHEX(hsv.h, hsv.s, hsv.v);
+        $(":root").css("--main", darkHEX);
+        $(":root").css("--contrast", $("#color").val());
+        $("#hexcode").text($("#color").val().toUpperCase() + " → " + darkHEX.toUpperCase());
+    } else {
+        hsv.v = 1 - hsv.v;
+        var darkHEX = HSVtoHEX(hsv.h, hsv.s, hsv.v);
+        $(":root").css("--main", $("#color").val());
+        $(":root").css("--contrast", darkHEX);
+        $("#hexcode").text($("#color").val().toUpperCase());
     }
-    $(":root").css("--bg", $("#color").val());
 }
 
 function HEXtoHSV(h) {
