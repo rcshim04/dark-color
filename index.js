@@ -4,7 +4,7 @@ $(document).ready(function () {
         setBackground();
     });
     $(".tooltip").click(function() {
-        navigator.clipboard.writeText($(this).text());
+        navigator.clipboard.writeText($("#hexcode").text());
         $("#tooltip").text("Copied!");
     });
     $(".tooltip").mouseout(function() {
@@ -14,6 +14,7 @@ $(document).ready(function () {
 
 function setBackground() {
     var hsv = HEXtoHSV($("#color").val());
+    console.log(hsv.v);
     if (hsv.v > 0.5) {
         hsv.v = 1 - hsv.v;
         var darkHEX = HSVtoHEX(hsv.h, hsv.s, hsv.v);
